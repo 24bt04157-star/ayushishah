@@ -704,8 +704,24 @@ header {
   box-shadow: 0 14px 30px rgba(47, 143, 224, 0.4); gap: 8px; display: inline-flex; align-items: center;
   transition: 0.3s; z-index: 999999;
 }
-@media (max-width: 480px) { .chatbot-toggle { right: 16px; bottom: 16px; } }
-.chatbot-toggle:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(47, 143, 224, 0.5); }
+@media (max-width: 768px) {
+  .chatbot-toggle {
+    width: 58px;
+    height: 58px;
+    right: 15px;
+    bottom: 20px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    font-size: 0;
+  }
+
+  .chatbot-toggle i {
+    font-size: 22px;
+    margin: 0;
+  }
+}
+}.chatbot-toggle:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(47, 143, 224, 0.5); }
 
 /* ---------- small-screen safety ---------- */
 @media (max-width: 900px) {
@@ -758,4 +774,72 @@ table { max-width: 100%; }
   .primary-btn:hover, .secondary-btn:hover, .whatsapp-btn:hover, .social-icon-box:hover {
     animation: none; transition: none;
   }
+}
+/* ================= MOBILE HERO FIX ================= */
+
+@media (max-width:768px){
+
+.hero-content{
+    gap:40px;
+}
+
+.hero-visual{
+    min-height:420px;
+    transform:scale(0.72);
+    transform-origin:top center;
+}
+
+.site-preview-card{
+    width:100%;
+    max-width:360px;
+    margin:auto;
+}
+
+@media (max-width:768px){
+
+.chat-popup{
+    width:180px;
+    right:8px;
+    bottom:8px;
+}
+
+.chat-popup-body{
+    padding:10px;
+    min-height:120px;
+}
+
+.chat-name{
+    font-size:11px;
+}
+
+.term-line{
+    font-size:11px;
+}
+
+}
+
+.float-analytics{
+    width:150px;
+    left:-10px;
+    top:-20px;
+    padding:10px;
+}
+
+.float-badge{
+    width:170px;
+    right:-5px;
+    bottom:-15px;
+    padding:10px;
+}
+
+.ghost-hero{
+    min-height:130px;
+    padding:18px;
+}
+
+.ghost-btn{
+    width:100px;
+    height:28px;
+}
+
 }

@@ -843,3 +843,44 @@ table { max-width: 100%; }
 }
 
 }
+@media (max-width:768px){
+
+.hero-visual{
+    min-height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    padding-top:20px;
+}
+
+.site-preview-card{
+    width:100%;
+    max-width:340px;
+    margin:auto;
+}
+
+.chat-popup{
+    width:200px;
+    right:10px;
+    bottom:10px;
+}
+
+.float-analytics{
+    position:relative;
+    left:0;
+    top:0;
+    width:220px;
+    margin:0 auto;
+}
+
+.float-badge{
+    position:relative;
+    right:0;
+    bottom:0;
+    width:220px;
+    margin:0 auto;
+}
+
+}

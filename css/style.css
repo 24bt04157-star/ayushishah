@@ -775,112 +775,52 @@ table { max-width: 100%; }
     animation: none; transition: none;
   }
 }
-/* ================= MOBILE HERO FIX ================= */
+/* ================= MOBILE HERO: STACKED LAYOUT ================= */
+@media (max-width: 940px) {
+  .hero-visual {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    min-height: auto;
+    transform: none;
+    width: 100%;
+  }
 
-@media (max-width:768px){
+  .orb, .orb-ring { display: none; }
 
-.hero-content{
-    gap:40px;
+  .float-analytics,
+  .float-badge {
+    position: static;
+    inset: auto;
+    left: auto; right: auto; top: auto; bottom: auto;
+    width: 100%;
+    max-width: 420px;
+    margin: 0;
+  }
+
+  .float-analytics { order: 0; }
+  .site-preview-card { order: 1; }
+  .float-badge { order: 2; }
+
+  .site-preview-card {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
 }
 
-.hero-visual{
-    min-height:420px;
-    transform:scale(0.72);
-    transform-origin:top center;
-}
+@media (max-width: 480px) {
+  .chat-popup {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: min(200px, 60%);
+  }
+  .chat-popup-body { padding: 10px; min-height: 130px; }
+  .chat-name, .term-line { font-size: 11px; }
 
-.site-preview-card{
-    width:100%;
-    max-width:360px;
-    margin:auto;
-}
-
-@media (max-width:768px){
-
-.chat-popup{
-    width:180px;
-    right:8px;
-    bottom:8px;
-}
-
-.chat-popup-body{
-    padding:10px;
-    min-height:120px;
-}
-
-.chat-name{
-    font-size:11px;
-}
-
-.term-line{
-    font-size:11px;
-}
-
-}
-
-.float-analytics{
-    width:150px;
-    left:-10px;
-    top:-20px;
-    padding:10px;
-}
-
-.float-badge{
-    width:170px;
-    right:-5px;
-    bottom:-15px;
-    padding:10px;
-}
-
-.ghost-hero{
-    min-height:130px;
-    padding:18px;
-}
-
-.ghost-btn{
-    width:100px;
-    height:28px;
-}
-
-}
-@media (max-width:768px){
-
-.hero-visual{
-    min-height:auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:18px;
-    padding-top:20px;
-}
-
-.site-preview-card{
-    width:100%;
-    max-width:340px;
-    margin:auto;
-}
-
-.chat-popup{
-    width:200px;
-    right:10px;
-    bottom:10px;
-}
-
-.float-analytics{
-    position:relative;
-    left:0;
-    top:0;
-    width:220px;
-    margin:0 auto;
-}
-
-.float-badge{
-    position:relative;
-    right:0;
-    bottom:0;
-    width:220px;
-    margin:0 auto;
-}
-
+  .ghost-hero { min-height: 130px; padding: 18px; }
+  .ghost-btn { width: 100px; height: 28px; }
 }

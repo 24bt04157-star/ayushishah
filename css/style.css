@@ -1,7 +1,7 @@
 /* =========================================================
    BluePeakAI — Design Tokens
    Delicate light-blue, premium glass aesthetic
-   (Mobile-responsiveness pass applied)
+   Fully responsive: desktop / tablet / phone
    ========================================================= */
 :root {
   /* Color */
@@ -190,7 +190,6 @@ header {
   display: grid; grid-template-columns: 1.05fr 1.3fr; gap: 70px; align-items: center;
   max-width: 1320px; margin: auto;
 }
-@media (max-width: 940px) { .hero-content { grid-template-columns: 1fr; } }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 9px;
@@ -213,7 +212,6 @@ header {
 .hero-sub { color: var(--ink-soft); font-size: clamp(15px, 3.6vw, 17px); line-height: 1.85; margin: 24px 0 34px; max-width: 540px; }
 
 .hero-actions { display: flex; gap: 16px; margin-bottom: 34px; flex-wrap: wrap; }
-@media (max-width: 600px) { .hero-actions { flex-direction: column; } }
 
 .hero-trust { display: flex; flex-wrap: wrap; gap: 12px; }
 .trust-item {
@@ -230,6 +228,10 @@ header {
 .hero-checks i { color: var(--azure); margin-right: 6px; }
 
 /* ---------- hero visual ---------- */
+/* Desktop: orbs + floating cards are absolutely positioned around the
+   preview card. On mobile this entire block switches to a simple
+   stacked flex column further down — no absolute positioning, no
+   scaling, nothing can collide or clip. */
 .hero-visual { position: relative; min-height: 500px; display: flex; align-items: center; justify-content: center; width: 100%; }
 
 .orb {
@@ -247,7 +249,6 @@ header {
 .orb-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(63, 169, 220, 0.22); top: -8%; left: -6%; z-index: 0; }
 .orb-ring.ring-1 { width: 210px; height: 210px; }
 .orb-ring.ring-2 { width: 280px; height: 280px; top: -14%; left: -12%; border-color: rgba(63,169,220,.12); }
-@media (max-width: 940px) { .orb, .orb-ring { display: none; } }
 
 /* live site-preview mockup card (the "demo" of a client website) */
 .site-preview-card {
@@ -291,7 +292,9 @@ header {
 .ghost-subtitle { width: 92%; height: 10px; background: #e3f2fd; border-radius: 4px; margin-top: 4px; }
 .ghost-btn { width: 130px; height: 34px; background: linear-gradient(135deg, var(--azure), var(--cobalt)); border-radius: 8px; margin-top: 12px; }
 
-/* floating live-chat demo, overlaid on the ghost site like a real widget */
+/* floating live-chat demo, overlaid on the ghost site like a real widget.
+   Positioned relative to .site-preview-card (not .hero-visual), so it
+   can never escape the card or collide with the other floating cards. */
 .chat-popup {
   position: absolute; right: 16px; bottom: 16px; width: 260px; max-width: calc(100% - 32px);
   background: var(--glass-strong); border-radius: 18px; box-shadow: var(--shadow-lift);
@@ -299,7 +302,6 @@ header {
   transition: transform 0.3s ease; z-index: 2;
 }
 .chat-popup:hover { transform: translateY(-4px); }
-@media (max-width: 520px) { .chat-popup { width: calc(100% - 32px); right: 16px; } }
 
 .chat-popup-head {
   display: flex; align-items: center; gap: 10px; padding: 12px 14px;
@@ -329,7 +331,7 @@ header {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* floating cards */
+/* floating cards (desktop: absolutely positioned around the preview card) */
 .float-card {
   position: absolute; background: var(--glass-strong); border-radius: 16px;
   box-shadow: var(--shadow-lift); border: 1px solid var(--line);
@@ -338,9 +340,6 @@ header {
 .float-card:hover { transform: translateY(-4px); }
 
 .float-analytics { left: -6%; top: -4%; padding: 14px; width: 210px; }
-@media (max-width: 1150px) { .float-analytics { left: -2%; } }
-@media (max-width: 940px) { .float-analytics { position: static; width: 100%; margin-bottom: 14px; } }
-
 .float-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .float-row:last-child { margin-bottom: 0; }
 .float-icon {
@@ -354,16 +353,9 @@ header {
 .float-badge {
   right: -4%; bottom: 6%; padding: 11px 15px; display: flex; align-items: center; gap: 10px; width: 220px;
 }
-@media (max-width: 1150px) { .float-badge { right: -1%; } }
-@media (max-width: 940px) { .float-badge { position: static; width: 100%; margin-top: 14px; } }
 .float-badge i { color: var(--cobalt); font-size: 16px; flex-shrink: 0; }
 .float-title { font-size: 12px; font-weight: 700; }
 .float-sub { font-size: 11px; color: var(--ink-soft); }
-
-/* Mobile: hero visual no longer forces a tall empty box once content stacks */
-@media (max-width: 940px) {
-  .hero-visual { min-height: auto; display: block; }
-}
 
 /* ---------- stats bar ---------- */
 .stats-bar {
@@ -372,7 +364,6 @@ header {
   opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;
 }
 .stats-bar.visible { opacity: 1; transform: translateY(0); }
-@media (max-width: 700px) { .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; } }
 
 .stat {
   text-align: center; padding: 26px; background: var(--glass); border-radius: 18px;
@@ -382,7 +373,6 @@ header {
 .stat:hover { transform: translateY(-6px); }
 .stat-value { font-size: clamp(22px, 6vw, 32px); font-weight: 800; color: var(--cobalt); font-family: var(--font-display); }
 .stat-label { font-size: clamp(11px, 2.6vw, 13px); color: var(--ink-soft); margin-top: 6px; }
-@media (max-width: 480px) { .stat { padding: 18px 12px; } }
 
 /* ---------- glass cards base ---------- */
 .card {
@@ -397,9 +387,6 @@ header {
 
 @supports not (backdrop-filter: blur(16px)) { .card { background: #ffffff; } }
 
-@media (max-width: 600px) { .card { padding: 24px; } }
-@media (max-width: 380px) { .card { padding: 20px; } }
-
 /* ---------- bento grid (services + portfolio) ---------- */
 .bento-grid { max-width: 1320px; margin: auto; display: grid; gap: 26px; }
 
@@ -411,13 +398,6 @@ header {
 .service-b { grid-area: b; }
 .service-c { grid-area: c; }
 .service-d { grid-area: d; }
-
-@media (max-width: 900px) {
-  .services-bento { grid-template-columns: 1fr 1fr; grid-template-areas: "a a" "b b" "c d"; }
-}
-@media (max-width: 560px) {
-  .services-bento { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c" "d"; gap: 18px; }
-}
 
 .bento-card { display: flex; flex-direction: column; }
 .service-icon {
@@ -443,21 +423,10 @@ header {
 .tile-realty { grid-area: f; }
 .tile-restaurant { grid-area: r; }
 
-@media (max-width: 980px) {
-  .portfolio-bento {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "m m" "b c" "f f" "r r";
-  }
-}
-@media (max-width: 620px) {
-  .portfolio-bento { grid-template-columns: 1fr; grid-template-areas: "m" "b" "c" "f" "r"; gap: 18px; }
-}
-
 .portfolio-tile {
   display: flex; flex-direction: column; justify-content: space-between; min-height: 220px;
   color: #fff; text-decoration: none; padding: 32px;
 }
-@media (max-width: 600px) { .portfolio-tile { min-height: 180px; padding: 24px; } }
 
 .tile-medical { background: linear-gradient(150deg, #6AA8EE 0%, #1C6DBF 100%); }
 .tile-fashion { background: linear-gradient(150deg, #8FD3F4 0%, #3FA9DC 100%); }
@@ -492,11 +461,9 @@ header {
   background: linear-gradient(var(--azure), transparent 95%);
   opacity: 0.35;
 }
-@media (max-width: 620px) { .timeline-line { display: none; } }
 
 .timeline-step { display: grid; grid-template-columns: 56px 1fr; gap: 24px; margin-bottom: 30px; align-items: start; }
 .timeline-step:last-child { margin-bottom: 0; }
-@media (max-width: 620px) { .timeline-step { grid-template-columns: 1fr; gap: 12px; margin-bottom: 22px; } }
 
 .timeline-marker {
   width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -504,14 +471,11 @@ header {
   font-family: var(--font-mono); font-weight: 700; font-size: 15px;
   box-shadow: 0 10px 24px rgba(47, 143, 224, 0.35); z-index: 1; flex-shrink: 0;
 }
-@media (max-width: 620px) { .timeline-marker { width: 44px; height: 44px; font-size: 13px; } }
 .timeline-card h3 { font-size: clamp(17px, 4vw, 19px); margin-bottom: 8px; }
 .timeline-card p { color: var(--ink-soft); font-size: clamp(14px, 3.4vw, 16px); }
 
 /* ---------- pricing ---------- */
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: auto; }
-@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 620px) { .pricing-grid { grid-template-columns: 1fr; gap: 20px; } }
 
 .pricing-card .primary-btn, .pricing-card .secondary-btn { position: relative; z-index: 1; }
 .pricing-name { font-size: 18px; font-weight: 700; position: relative; z-index: 1; }
@@ -537,10 +501,8 @@ header {
 
 /* ---------- founder ---------- */
 .founder-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 54px; max-width: 1200px; margin: auto; align-items: center; }
-@media (max-width: 900px) { .founder-grid { grid-template-columns: 1fr; gap: 34px; } }
 
 .founder-image { padding: 0; overflow: hidden; border-radius: 26px; opacity: 1; transform: none; max-width: 360px; margin: 0 auto; }
-@media (max-width: 900px) { .founder-image { max-width: 280px; } }
 .founder-image img { border-radius: 26px; transition: transform 0.3s ease; }
 .founder-image:hover img { transform: scale(1.02); }
 
@@ -556,8 +518,6 @@ header {
 
 /* ---------- testimonials ---------- */
 .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1320px; margin: auto; }
-@media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 620px) { .testimonials-grid { grid-template-columns: 1fr; gap: 18px; } }
 
 .testimonial { display: flex; flex-direction: column; }
 .stars { color: var(--azure); margin-bottom: 12px; font-size: 14px; display: flex; gap: 4px; position: relative; z-index: 1; }
@@ -574,7 +534,6 @@ header {
   background: none; border: none; padding: 24px 26px; cursor: pointer; text-align: left;
   font-weight: 700; font-size: clamp(15px, 3.6vw, 16px); color: var(--ink); position: relative; z-index: 1;
 }
-@media (max-width: 480px) { .faq-question { padding: 18px 18px; } }
 .faq-icon { color: var(--cobalt); transition: transform 0.3s ease; flex-shrink: 0; }
 .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
 
@@ -582,14 +541,11 @@ header {
   max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
   padding: 0 26px; position: relative; z-index: 1;
 }
-@media (max-width: 480px) { .faq-answer { padding: 0 18px; } }
 .faq-answer p { color: var(--ink-soft); line-height: 1.75; padding-bottom: 0; }
 .faq-item.open .faq-answer { max-height: 300px; padding: 0 26px 24px; }
-@media (max-width: 480px) { .faq-item.open .faq-answer { padding: 0 18px 18px; } }
 
 /* ---------- contact ---------- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 54px; max-width: 1200px; margin: auto; }
-@media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 34px; } }
 
 .contact-info h2 { font-size: clamp(26px, 5.5vw, 36px); margin: 14px 0 14px; }
 .contact-info > p { color: var(--ink-soft); margin-bottom: 10px; line-height: 1.8; font-size: clamp(14px, 3.4vw, 16px); }
@@ -641,8 +597,6 @@ header {
 /* ---------- footer ---------- */
 .footer { background: var(--glass); backdrop-filter: blur(18px); border-top: 1px solid var(--line); padding: 56px 8% 40px; position: relative; z-index: 1; overflow: hidden; }
 .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr; gap: 28px; max-width: 1320px; margin: auto; }
-@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: left; } }
 
 .footer-logo { height: 40px; margin-bottom: 12px; }
 .footer-brand p { color: var(--ink-soft); font-size: 13.5px; }
@@ -663,7 +617,6 @@ header {
   background: var(--glass-strong); border-radius: 20px; box-shadow: var(--shadow-lift); border: 1px solid var(--line);
   backdrop-filter: blur(24px); display: none; flex-direction: column; z-index: 999999;
 }
-@media (max-width: 480px) { .mini-chatbot { right: 10px; left: 10px; bottom: 84px; width: auto; max-width: none; } }
 
 .mini-chatbot-header {
   display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px;
@@ -704,63 +657,7 @@ header {
   box-shadow: 0 14px 30px rgba(47, 143, 224, 0.4); gap: 8px; display: inline-flex; align-items: center;
   transition: 0.3s; z-index: 999999;
 }
-@media (max-width: 768px) {
-  .chatbot-toggle {
-    width: 58px;
-    height: 58px;
-    right: 15px;
-    bottom: 20px;
-    padding: 0;
-    border-radius: 50%;
-    justify-content: center;
-    font-size: 0;
-  }
-
-  .chatbot-toggle i {
-    font-size: 22px;
-    margin: 0;
-  }
-}
-}.chatbot-toggle:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(47, 143, 224, 0.5); }
-
-/* ---------- small-screen safety ---------- */
-@media (max-width: 900px) {
-  section { padding: 100px 6%; }
-}
-@media (max-width: 600px) {
-  section { padding: 90px 6%; }
-  .hero { padding-top: 150px; }
-}
-@media (max-width: 480px) {
-  section { padding: 80px 5%; }
-  .hero { padding-top: 130px; }
-  .logo-word { font-size: 15px; }
-}
-@media (max-width: 360px) {
-  section { padding: 70px 5%; }
-  .hero { padding-top: 120px; }
-}
-
-/* ---------- mobile nav ---------- */
-@media (max-width: 860px) {
-  .nav-toggle { display: block; }
-  .nav-links {
-    position: absolute; top: calc(100% + 10px); left: 0; right: 0;
-    background: var(--glass-strong); backdrop-filter: blur(22px); border: 1px solid var(--line);
-    border-radius: 24px; flex-direction: column; gap: 4px; padding: 16px; display: none; box-shadow: var(--shadow-lift);
-    max-height: 70vh; overflow-y: auto;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { width: 100%; padding: 12px 14px; border-radius: 12px; }
-  .nav-links a:hover { background: rgba(47, 143, 224, 0.08); }
-  .nav-links .primary-btn { margin-top: 6px; width: 100%; }
-}
-
-/* ---------- global overflow guards ---------- */
-.hero-content, .contact-grid, .founder-grid, .bento-grid, .pricing-grid,
-.testimonials-grid, .timeline, .faq-list { max-width: 100%; }
-
-table { max-width: 100%; }
+.chatbot-toggle:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(47, 143, 224, 0.5); }
 
 /* ---------- interaction & motion safety ---------- */
 @media (hover: none) {
@@ -775,52 +672,143 @@ table { max-width: 100%; }
     animation: none; transition: none;
   }
 }
-/* ================= MOBILE HERO: STACKED LAYOUT ================= */
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS
+   One clean cascade, largest → smallest. Each rule only
+   overrides what actually needs to change at that width.
+   ========================================================= */
+
+/* ----- ≤1150px : floating hero cards pull in slightly ----- */
+@media (max-width: 1150px) {
+  .float-analytics { left: -2%; }
+  .float-badge { right: -1%; }
+}
+
+/* ----- ≤980px : portfolio bento goes 2-column ----- */
+@media (max-width: 980px) {
+  .portfolio-bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "m m" "b c" "f f" "r r";
+  }
+}
+
+/* ----- ≤940px : hero switches from 2-column grid to a single
+   stacked column. This is also where the hero-visual stops using
+   absolute positioning and becomes a simple flex stack, so on every
+   phone/tablet size below this the analytics card, preview card, and
+   notification badge just sit one under another — nothing overlaps. ----- */
 @media (max-width: 940px) {
+  .hero-content { grid-template-columns: 1fr; }
+
+  .orb, .orb-ring { display: none; }
+
   .hero-visual {
     position: static;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    min-height: auto;
-    transform: none;
     width: 100%;
   }
 
-  .orb, .orb-ring { display: none; }
-
-  .float-analytics,
-  .float-badge {
+  .float-card {
     position: static;
-    inset: auto;
-    left: auto; right: auto; top: auto; bottom: auto;
     width: 100%;
     max-width: 420px;
-    margin: 0;
   }
-
-  .float-analytics { order: 0; }
-  .site-preview-card { order: 1; }
-  .float-badge { order: 2; }
-
-  .site-preview-card {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-  }
+  .float-analytics { order: 1; }
+  .site-preview-card { order: 2; width: 100%; max-width: 420px; margin: 0 auto; }
+  .float-badge { order: 3; }
 }
 
+/* ----- ≤900px : services bento, founder, contact go single/near-single column ----- */
+@media (max-width: 900px) {
+  section { padding: 100px 6%; }
+
+  .services-bento { grid-template-columns: 1fr 1fr; grid-template-areas: "a a" "b b" "c d"; }
+  .pricing-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr 1fr; }
+  .founder-grid { grid-template-columns: 1fr; gap: 34px; }
+  .founder-image { max-width: 280px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 34px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ----- ≤860px : hamburger nav kicks in ----- */
+@media (max-width: 860px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+    background: var(--glass-strong); backdrop-filter: blur(22px); border: 1px solid var(--line);
+    border-radius: 24px; flex-direction: column; gap: 4px; padding: 16px; display: none; box-shadow: var(--shadow-lift);
+    max-height: 70vh; overflow-y: auto;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { width: 100%; padding: 12px 14px; border-radius: 12px; }
+  .nav-links a:hover { background: rgba(47, 143, 224, 0.08); }
+  .nav-links .primary-btn { margin-top: 6px; width: 100%; }
+}
+
+/* ----- ≤700px : stats bar goes 2×2 ----- */
+@media (max-width: 700px) {
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
+}
+
+/* ----- ≤620px : everything narrows to a single column ----- */
+@media (max-width: 620px) {
+  section { padding: 90px 6%; }
+  .hero { padding-top: 150px; }
+
+  .hero-actions { flex-direction: column; }
+
+  .portfolio-bento { grid-template-columns: 1fr; grid-template-areas: "m" "b" "c" "f" "r"; gap: 18px; }
+  .services-bento { grid-template-columns: 1fr; grid-template-areas: "a" "b" "c" "d"; gap: 18px; }
+  .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 18px; }
+
+  .timeline-line { display: none; }
+  .timeline-step { grid-template-columns: 1fr; gap: 12px; margin-bottom: 22px; }
+  .timeline-marker { width: 44px; height: 44px; font-size: 13px; }
+
+  .faq-question { padding: 18px 18px; }
+  .faq-answer { padding: 0 18px; }
+  .faq-item.open .faq-answer { padding: 0 18px 18px; }
+
+  .portfolio-tile { min-height: 180px; padding: 24px; }
+  .chat-popup { width: 100%; }
+}
+
+/* ----- ≤500px : footer to single column ----- */
+@media (max-width: 500px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: left; }
+}
+
+/* ----- ≤480px : tightest phones ----- */
 @media (max-width: 480px) {
-  .chat-popup {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    width: min(200px, 60%);
-  }
-  .chat-popup-body { padding: 10px; min-height: 130px; }
-  .chat-name, .term-line { font-size: 11px; }
+  section { padding: 80px 5%; }
+  .hero { padding-top: 130px; }
+  .logo-word { font-size: 15px; }
+  .stat { padding: 18px 12px; }
 
-  .ghost-hero { min-height: 130px; padding: 18px; }
-  .ghost-btn { width: 100px; height: 28px; }
+  .mini-chatbot { right: 10px; left: 10px; bottom: 84px; width: auto; max-width: none; }
+
+  .chatbot-toggle {
+    width: 58px; height: 58px; right: 15px; bottom: 20px;
+    padding: 0; border-radius: 50%; justify-content: center; font-size: 0;
+  }
+  .chatbot-toggle i { font-size: 22px; margin: 0; }
 }
+
+/* ----- ≤360px : smallest phones ----- */
+@media (max-width: 360px) {
+  section { padding: 70px 5%; }
+  .hero { padding-top: 120px; }
+}
+
+/* ---------- global overflow guards ---------- */
+.hero-content, .contact-grid, .founder-grid, .bento-grid, .pricing-grid,
+.testimonials-grid, .timeline, .faq-list { max-width: 100%; }
+
+table { max-width: 100%; }
